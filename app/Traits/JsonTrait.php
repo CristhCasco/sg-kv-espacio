@@ -51,7 +51,10 @@ trait JsonTrait {
         ->get();
 
         
-        $cliente = $sale->customer()->select('id', 'name', 'last_name')->first();
+        $cliente = $sale->customer()->select('id', 'name', 'last_name', 'person', 'company')->first();
+        if ($cliente && !$cliente->name) {
+            $cliente->name = $cliente->display_name; // jurídicos: razón social
+        }
     
         $user = $sale->user;
         $company = Company::select('id', 'name', 'address', 'phone', 'ruc')->first();
@@ -106,7 +109,10 @@ trait JsonTrait {
                 return $item;
             });
 
-        $cliente = $sale->customer()->select('id', 'name', 'last_name')->first();
+        $cliente = $sale->customer()->select('id', 'name', 'last_name', 'person', 'company')->first();
+        if ($cliente && !$cliente->name) {
+            $cliente->name = $cliente->display_name; // jurídicos: razón social
+        }
         $user = $sale->user;
         $company = Company::select('id', 'name', 'address', 'phone', 'ruc')->first();
 
