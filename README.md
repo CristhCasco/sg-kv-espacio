@@ -1,6 +1,6 @@
-# Despensa y Carniceria Calle 10 - Sistema de Gestión de Ventas y Preventas
+# KV Espacio - Sistema de Gestión de Ventas y Preventas
 
-Sistema integral para la gestión de ventas, preventas (pedidos anticipados), inventario y créditos. Desarrollado con Laravel 8+ y Livewire para Despensa y Carniceria Calle 10.
+Sistema integral para la gestión de ventas, preventas (pedidos anticipados), inventario y créditos. Desarrollado con Laravel 8+ y Livewire para KV Espacio (Itaipyte).
 
 ## 🎯 Características Principales
 
@@ -63,41 +63,64 @@ Sistema integral para la gestión de ventas, preventas (pedidos anticipados), in
 - **DOMPDF**: Generación de PDF
 - **Maatwebsite Excel**: Exportación a Excel
 
-## 🚀 Instalación
+## 🚀 Instalación (PC del cliente con Laragon)
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/CristhCasco/boutique1.1.git
+cd C:\laragon\www
+git clone https://github.com/CristhCasco/sg-kv-espacio.git
+cd sg-kv-espacio
 
-# Instalar dependencias
-composer install
-npm install
+# Instalar dependencias (los assets ya vienen compilados en public/)
+composer install --no-dev --optimize-autoloader
 
 # Configurar archivo .env
-cp .env.example .env
+copy .env.example .env
 php artisan key:generate
+```
 
-# Migrar base de datos
-php artisan migrate
+Editar el `.env`:
 
-# Compilar assets
-npm run dev
+```
+APP_NAME="KV Espacio"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=http://sg-kv-espacio.test
+DB_DATABASE=crisinfocompy_kv_espacio
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-# Iniciar servidor
-php artisan serve
+Crear la base de datos `crisinfocompy_kv_espacio` (HeidiSQL) y luego:
+
+```bash
+php artisan migrate --seed --force
+php artisan storage:link
+```
+
+Recargar Apache en Laragon e ingresar en `http://sg-kv-espacio.test`.
+
+> Ejecutar `--seed` solo en la primera instalación, nunca con datos reales cargados.
+
+### Actualizar
+
+```bash
+cd C:\laragon\www\sg-kv-espacio
+git pull
+composer install --no-dev --optimize-autoloader
+php artisan migrate --force
+php artisan optimize:clear
 ```
 
 ## 📋 Requisitos
 
-- PHP 8.0+
+- Laragon (PHP 8.0+, MySQL 5.7+, Apache)
 - Composer
-- Node.js y npm
-- MySQL 5.7+
-- Laravel 8+
+- Git
 
 ## 🔐 Autenticación
 
-El sistema incluye autenticación integrada con roles de usuario:
+El ingreso es con **nombre de usuario** (no con correo). El sistema incluye roles de usuario:
 - **Admin**: Acceso total al sistema
 - **Vendedor**: Acceso a POS y preventas
 - **Soporte**: Acceso a reportes
@@ -109,6 +132,9 @@ El sistema incluye autenticación integrada con roles de usuario:
 - `DB_DATABASE`: Nombre de la base de datos
 - `DB_USERNAME`: Usuario de la base de datos
 - `DB_PASSWORD`: Contraseña de la base de datos
+
+### Datos de la empresa
+Se cargan con `CompanySeeder` y se editan desde **Configuración**. KV Espacio todavía no tiene RUC ni timbrado: el RUC es opcional y, cuando lo tenga, se carga desde Configuración junto con los datos de facturación.
 
 ### Moneda
 La moneda predeterminada es **Guaraní (Gs.)**
@@ -160,7 +186,7 @@ Para reportar bugs o sugerencias, crear un issue en el repositorio.
 
 ## 📄 Licencia
 
-Todos los derechos reservados © 2026 Despensa y Carniceria Calle 10
+Todos los derechos reservados © 2026 KV Espacio
 
 ## 👤 Autor
 
@@ -168,6 +194,6 @@ Desarrollado por: **CristhCasco**
 
 ---
 
-**Versión**: 1.2  
-**Fecha**: Abril 2026  
+**Versión**: 2.0.0  
+**Fecha**: Noviembre 2026  
 **Estado**: Producción
