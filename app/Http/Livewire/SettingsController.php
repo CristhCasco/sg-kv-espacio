@@ -85,8 +85,8 @@ class SettingsController extends Component
         $this->validate([
             'name'              => 'required|max:255',
             'trade_name'        => 'nullable|max:255',
-            'ruc'               => 'required|regex:/^\d+$/|max:20',
-            'dv'                => 'required|digits:1',
+            'ruc'               => 'nullable|regex:/^\d+$/|max:20',
+            'dv'                => 'nullable|required_with:ruc|digits:1',
             'address'           => 'required|max:255',
             'city'              => 'nullable|max:100',
             'phone'             => 'required|max:50',
@@ -94,9 +94,8 @@ class SettingsController extends Component
             'economic_activity' => 'nullable|max:255',
         ], [
             'name.required'    => 'La razón social es requerida',
-            'ruc.required'     => 'El RUC es requerido',
             'ruc.regex'        => 'El RUC solo debe contener números (sin el DV)',
-            'dv.required'      => 'El dígito verificador es requerido',
+            'dv.required_with' => 'El dígito verificador es requerido si carga el RUC',
             'dv.digits'        => 'El DV debe ser un solo dígito',
             'address.required' => 'La dirección es requerida',
             'phone.required'   => 'El teléfono es requerido',
@@ -107,8 +106,8 @@ class SettingsController extends Component
         $company->fill([
             'name'              => trim($this->name),
             'trade_name'        => $this->trade_name ?: null,
-            'ruc'               => trim($this->ruc),
-            'dv'                => $this->dv,
+            'ruc'               => trim((string) $this->ruc), // vacío si aún no tiene RUC (columna NOT NULL)
+            'dv'                => trim((string) $this->ruc) !== '' ? $this->dv : null,
             'address'           => trim($this->address),
             'city'              => $this->city ?: null,
             'phone'             => trim($this->phone),

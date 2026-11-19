@@ -151,7 +151,9 @@ class PrinterNinjaService
         };
 
         $this->text($d['empresa']['name'], 'c', true, true);
-        $this->text('RUC: ' . $d['empresa']['ruc'] . '-' . $d['empresa']['dv'], 'c');
+        if (!empty($d['empresa']['ruc'])) {
+            $this->text('RUC: ' . $d['empresa']['ruc'] . (empty($d['empresa']['dv']) ? '' : '-' . $d['empresa']['dv']), 'c');
+        }
         $this->text('Tel: ' . $d['empresa']['phone'], 'c');
         $this->separator('=');
 

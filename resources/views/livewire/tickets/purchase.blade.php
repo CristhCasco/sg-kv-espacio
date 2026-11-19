@@ -42,7 +42,9 @@
     @include('livewire.tickets.partials.logo')
     <div class="center">
         <strong>{{ $empresa['name'] }}</strong><br>
+        @if(!empty($empresa['ruc']))
         RUC: {{ $empresa['ruc'] }}-{{$empresa['dv']}}<br>
+        @endif
         Tel: {{ $empresa['phone'] }}
     </div>
 

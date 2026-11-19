@@ -22,8 +22,8 @@ class TicketPurchaseController extends Controller
         $compra = Purchase::with('details.product', 'supplier', 'user')->findOrFail(base64_decode($hash));
 
         $company = Company::first();
-        if (! $company || empty($company->name) || empty($company->ruc)) {
-            abort(422, 'Por favor configure los datos de la empresa (nombre y RUC) antes de generar comprobantes de compra.');
+        if (! $company || empty($company->name)) {
+            abort(422, 'Por favor configure los datos de la empresa antes de generar comprobantes de compra.');
         }
 
         return response(PrinterNinjaService::purchasePayload($compra), 200)
@@ -44,9 +44,9 @@ class TicketPurchaseController extends Controller
 
         // Company validation: do not allow generating purchase tickets if company data is missing
         $company = Company::first();
-        if (! $company || empty($company->name) || empty($company->ruc)) {
+        if (! $company || empty($company->name)) {
             return redirect()->route('purchases')
-                ->with('error', 'Por favor configure los datos de la empresa (nombre y RUC) antes de generar comprobantes de compra.');
+                ->with('error', 'Por favor configure los datos de la empresa antes de generar comprobantes de compra.');
         }
 
         $data = PurchaseTicketService::data($compra, $company);

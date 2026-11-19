@@ -51,14 +51,14 @@
 
                     <div class="col-sm-8 col-md-4">
                         <div class="form-group">
-                            <label>RUC (sin DV) *</label>
+                            <label>RUC (sin DV)</label>
                             <input wire:model.lazy="ruc" type="text" class="form-control" placeholder="ej: 80012345">
                             @error('ruc') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-sm-4 col-md-2">
                         <div class="form-group">
-                            <label>DV *</label>
+                            <label>DV</label>
                             <input wire:model.lazy="dv" type="text" maxlength="1" class="form-control" placeholder="ej: 7">
                             @error('dv') <span class="text-danger er">{{ $message }}</span> @enderror
                         </div>
