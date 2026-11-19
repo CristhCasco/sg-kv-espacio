@@ -63,7 +63,7 @@ class PrinterNinjaService
             })->values()),
             json_encode([
                 'id'        => optional($sale->customer)->id,
-                'name'      => optional($sale->customer)->name,
+                'name'      => optional($sale->customer)->name ?: optional($sale->customer)->display_name, // jurídicos no tienen name
                 'last_name' => optional($sale->customer)->last_name,
             ]),
             json_encode(['id' => optional($sale->user)->id, 'name' => optional($sale->user)->name]),
@@ -411,7 +411,7 @@ class PrinterNinjaService
         $this->text('Comprobante de venta', 'c', true);
         $this->text(Carbon::parse($sale->created_at)->format('d/m/Y H:i'), 'c');
         $this->separator();
-        $this->text('Cliente: ' . (optional($sale->customer)->name ?? 'Without customer'));
+        $this->text('Cliente: ' . (optional($sale->customer)->display_name ?? 'Without customer'));
         $this->text('Venta: #' . $sale->id);
         $this->text('Tipo: ' . $sale->payment_type);
         $this->separator();

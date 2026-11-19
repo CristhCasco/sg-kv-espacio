@@ -29,7 +29,7 @@
                                     <tr>
                                         <td>{{ $sale->id }}</td>
                                         <td>{{ number_format($sale->total, 0) }} Gs.</td>
-                                        <td>{{ $sale->customer->name ?? 'Cliente Ocasional' }}</td>
+                                        <td>{{ optional($sale->customer)->display_name ?? 'Cliente Ocasional' }}</td>
                                         <td>{{ $sale->payment_type }}</td>
                                         <td>{{ $sale->payment_method }}</td>
                                         <td>{{ $sale->created_at->format('d/m/Y H:i') }}</td>

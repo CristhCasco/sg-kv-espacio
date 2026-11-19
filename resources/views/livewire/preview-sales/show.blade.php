@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-6">
                             <p><strong>Cliente:</strong></p>
-                            <p>{{ $previewSale->customer->name }}<br>
+                            <p>{{ optional($previewSale->customer)->display_name }}<br>
                             <small class="text-muted">{{ $previewSale->customer->full_document ? $previewSale->customer->document_label . ' ' . $previewSale->customer->full_document : 'Sin documento' }}</small></p>
                         </div>
                     </div>

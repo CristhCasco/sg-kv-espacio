@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card simple-title-task ui-sorteable-handle">
-                                <p class="h3 flex-grow-1 text-center">Editar Preventa #{{ $previewSale->id }} - Cliente: {{ $previewSale->customer->name }}</p>
+                                <p class="h3 flex-grow-1 text-center">Editar Preventa #{{ $previewSale->id }} - Cliente: {{ optional($previewSale->customer)->display_name }}</p>
                             </div>
                         </div>
 

@@ -27,7 +27,7 @@ class TicketSaleController extends Controller
         return view('livewire.tickets.sale', array_merge([
             'date'                   => Carbon::parse($sale->created_at)->format('d/m/Y H:i'),
             'company'                => $company,
-            'customer'               => $sale->customer->name ?? 'Without customer',
+            'customer'               => optional($sale->customer)->display_name ?? 'Without customer',
             'sale_id'                => $sale->id,
             'payment_type'           => $sale->payment_type,
             'products'               => $products,
@@ -102,7 +102,7 @@ class TicketSaleController extends Controller
         $pdf = Pdf::loadView('livewire.tickets.sale', array_merge([
             'date'                => Carbon::parse($sale->created_at)->format('d/m/Y H:i'),
             'company'             => $company, // 👈 Pasar la empresa completa
-            'customer'            => $sale->customer->name ?? 'Without customer',
+            'customer'            => optional($sale->customer)->display_name ?? 'Without customer',
             'sale_id'             => $sale->id,
             'payment_type'        => $sale->payment_type,
             'products'            => $products,

@@ -23,7 +23,7 @@
                             <!-- <select wire:model="customer_selected_id" class="form-control">
                                 <option value="0">Cliente</option>
                                 @foreach($customers as $customer)
-                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                <option value="{{ $customer->id }}">{{ $customer->display_name }}</option>
                                 @endforeach
                             </select> 
 

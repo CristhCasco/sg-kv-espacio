@@ -30,7 +30,7 @@ class CreditReceiptService
         $totalPaid = $payments->sum('monto');
 
         return [
-            'cliente'          => $sale->customer->name,
+            'cliente'          => optional($sale->customer)->display_name, // jurídicos: razón social
             'fecha'            => now()->format('d/m/Y H:i'),
             'venta_id'         => $sale->id,
             'total_original'   => $sale->total,

@@ -39,7 +39,7 @@
                             @foreach($data as $customers)
 							<tr>
 								<td><h6>{{$customers->person}}</h6></td>
-                                <td><h6 class="text-center">{{$customers->name}}</h6></td>
+                                <td><h6 class="text-center">{{ $customers->name ?: $customers->company }}</h6></td>
 								<td><h6 class="text-center">{{$customers->last_name}}</h6></td>
                                 <td><h6 class="text-center">{{$customers->ci}}</h6></td>
                                 <td><h6 class="text-center">{{$customers->company}}</h6></td>

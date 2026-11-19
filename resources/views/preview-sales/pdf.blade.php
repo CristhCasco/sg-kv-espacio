@@ -203,7 +203,7 @@
             <div class="section-title">CLIENTE</div>
             <div class="info-row">
                 <span class="info-label">Nombre:</span>
-                <span class="info-value">{{ $previewSale->customer->name }}</span>
+                <span class="info-value">{{ optional($previewSale->customer)->display_name }}</span>
             </div>
             @if($previewSale->customer->full_document)
                 <div class="info-row">

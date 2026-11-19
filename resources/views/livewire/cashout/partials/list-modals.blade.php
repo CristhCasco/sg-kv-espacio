@@ -5,7 +5,7 @@
             'title' => 'Ventas del período',
             'total' => $totalSales,
             'columns' => ['Cliente', 'Items', 'Total'],
-            'rows' => collect($sales)->map(fn($sale) => [$sale->customer->name, Num::qty($sale->items), number_format($sale->total, 0)]),
+            'rows' => collect($sales)->map(fn($sale) => [optional($sale->customer)->display_name, Num::qty($sale->items), number_format($sale->total, 0)]),
             'empty' => 'Sin ventas en el período',
         ],
         'modal-purchases-list' => [

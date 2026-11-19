@@ -65,8 +65,8 @@ class CreatePreviewSale extends Component
         $customer = Customer::find($customerId);
         if ($customer) {
             $this->customerId = $customer->id;
-            $this->customerName = $customer->name;
-            $this->notifyUser('success', 'Cliente seleccionado: ' . $customer->name);
+            $this->customerName = $customer->display_name;
+            $this->notifyUser('success', 'Cliente seleccionado: ' . $customer->display_name);
         }
     }
 

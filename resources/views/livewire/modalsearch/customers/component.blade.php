@@ -146,7 +146,7 @@
                                     @forelse($customers as $customer)
                                     <tr>
                                         <td><div class="text-left"><h6><b>{{$customer->id}}</b></h6></div></td>
-                                        <td><div class="text-left"><h6><b>{{$customer->name}}</b></h6></div></td>
+                                        <td><div class="text-left"><h6><b>{{ $customer->name ?: $customer->company }}</b></h6></div></td>
                                         <td><div class="text-left"><h6><b>{{$customer->last_name}}</b></h6></div></td>
                                         <td><div class="text-left"><h6><b>{{$customer->ci}}</b></h6></div></td>
                                         <td><div class="text-left"><h6><b>{{$customer->company}}</b></h6></div></td>

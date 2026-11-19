@@ -34,7 +34,7 @@
                     <select wire:model.live="customer_id" class="form-select">
                         <option value="">Todos los clientes</option>
                         @foreach($customers as $customer)
-                            <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                            <option value="{{ $customer->id }}">{{ $customer->display_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -76,7 +76,7 @@
                     @forelse($previewSales as $preventa)
                         <tr>
                             <td><strong>#{{ $preventa->id }}</strong></td>
-                            <td>{{ $preventa->customer->name }}</td>
+                            <td>{{ optional($preventa->customer)->display_name }}</td>
                             <td>
                                 @if($preventa->status == 'pending')
                                     <span class="badge bg-warning">Pendiente</span>

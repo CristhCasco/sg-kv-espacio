@@ -88,7 +88,7 @@
                     @forelse($previewSales as $preventa)
                         <tr>
                             <td><strong>#{{ $preventa->id }}</strong></td>
-                            <td>{{ $preventa->customer->name }}</td>
+                            <td>{{ optional($preventa->customer)->display_name }}</td>
                             <td>
                                 @if($preventa->status == 'pending')
                                     <span class="badge bg-warning">Pendiente</span>
