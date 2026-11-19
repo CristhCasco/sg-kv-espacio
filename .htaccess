@@ -1,0 +1,35 @@
+# -----------------------------------------------------------------------------
+# Seguridad: cuando el sistema se abre por subcarpeta
+#   http://localhost/sg-calle10/public   o   http://IP/sg-calle10/public
+# Apache publica TODA la carpeta del proyecto. Sin estas reglas se podían
+# descargar el .env (contraseña de la base de datos), la carpeta .git
+# (todo el código fuente) y los logs.
+#
+# Solo se permite la carpeta public/; todo lo demás responde 403.
+# (Con el dominio sg-calle10.test este archivo no se usa: Laragon ya
+#  apunta directo a public/.)
+# -----------------------------------------------------------------------------
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # public/ es la única carpeta accesible desde la web
+    RewriteRule ^public(/|$) - [L]
+
+    # La raíz del proyecto lleva al sistema (detecta sola el nombre de la carpeta)
+    RewriteCond %{REQUEST_URI} ^(.*)/$
+    RewriteRule ^$ %1/public/ [R=302,L]
+
+    # Todo lo demás (.env, .git, storage, vendor, app, config, logs...) prohibido
+    RewriteRule ^ - [F,L]
+</IfModule>
+
+# Si mod_rewrite no estuviera disponible, no exponer nada
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
+
+# Respaldo: nunca servir archivos ocultos (.env, .git, .htaccess...)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
